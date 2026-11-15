@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Astronauts · Sandbox Phaser</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #barra {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 84px;
+      z-index: 5;
+      background: #070a22;
+      border-bottom: 2px solid var(--borda);
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px
+    }
+
+    #barra .lin {
+      gap: 6px
+    }
+
+    #barra button {
+      min-height: 28px;
+      padding: 0 10px;
+      font-size: 13px
+    }
+
+    #barra select {
+      font: inherit;
+      background: var(--fundo);
+      color: var(--txt);
+      border: 2px solid var(--borda);
+      padding: 2px 6px
+    }
+
+    #barra label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+      color: var(--txt)
+    }
+
+    #barra input[type=range] {
+      width: 120px;
+      padding: 0
+    }
+
+    #barra input[type=checkbox] {
+      width: auto;
+      padding: 0
+    }
+
+    .grupo {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding-right: 10px;
+      border-right: 1px solid var(--borda)
+    }
+
+    .grupo:last-child {
+      border: 0
+    }
+
+    .ajuda {
+      color: var(--sub);
+      font-size: 12px
+    }
+  </style>
+  <script src="js/estilo.js"></script>
+  <script src="js/vendor/phaser.min.js"></script>
+</head>
+
+<body>
+  <div id="barra">
+    <div class="lin">
+      <div class="grupo" id="cenas"></div>
+      <div class="grupo">
+        <label>Destino <select id="destino">
+            <option value="marte">Marte</option>
+            <option value="lua">Lua</option>
+          </select></label>
+        <label>Nave <select id="nave">
+            <option>aurora</option>
+            <option>baoba</option>
+            <option>impala</option>
+            <option>ubuntu</option>
+          </select></label>
+        <label>Astronauta <select id="char">
+            <option>amelia</option>
+            <option>nyeleti</option>
+            <option>tomas</option>
+            <option>kito</option>
+          </select></label>
+      </div>
+      <div class="grupo"><button id="nia">Falar com a Nia</button><button id="estilo"></button></div>
+    </div>
+    <div class="lin">
+      <div class="grupo">
+        <label><input type="checkbox" id="energia"> energia</label>
+        <label><input type="checkbox" id="radio"> rádio</label>
+        <label><input type="checkbox" id="habitat"> habitat</label>
+        <label><input type="checkbox" id="tempestade"> tempestade</label>
+        <label>Vento <input type="range" id="vento" min="0" max="100" value="25"></label><button type="button" id="ventoAuto">auto</button>
+      </div>
+      <div class="grupo" id="g-rota"><label>Viagem <input type="range" id="prog" min="0" max="100" value="40"></label>
+      </div>
+      <span class="ajuda">Setas ou A/D andam · Espaço salta (superfície) · <b id="info"></b></span>
+    </div>
+  </div>
+  <div id="palco">
+    <canvas id="cv" width="1280" height="720"></canvas>
+    <div id="ui"></div>
+  </div>
+  <script>
+    document.body.classList.toggle("pixel", !Estilo.suave());
+    var be = document.getElementById("estilo");
+    be.textContent = "Estilo: " + Estilo.modo;
+    be.onclick = function () { Estilo.alternar(); location.reload(); };
+  </script>
+  <script type="module" src="js/sandbox.js"></script>
+</body>
+
+</html>
